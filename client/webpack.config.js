@@ -22,7 +22,7 @@ module.exports = () => {
         template: "./index.html",
         title: "JATE",
       }),
-      new MiniCssExtractPlugin(),
+     // new MiniCssExtractPlugin(),
       new InjectManifest({
         swSrc: "./src-sw.js",
         swDest: "service-worker.js",
@@ -36,7 +36,7 @@ module.exports = () => {
         crossorigin: "use-credentials", //can be null, use-credentials or anonymous
         icons: [
           {
-            src: path.resolve("/src/images/logo.png"),
+            src: path.resolve("src/images/logo.png"),
             sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
           },
         ],
