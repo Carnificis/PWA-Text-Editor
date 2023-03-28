@@ -12,12 +12,12 @@ const initdb = async () =>
     },
   });
 
-export const postDb = async (name, home, cell, email) => {
-  console.log("Post to the ase");
+export const putDb = async (notes) => {
+  console.log("Put to the ase");
   const JATEDb = await openDB("JATE", 1);
   const tx = JATEDb.transaction("JATE", "readwrite");
   const store = tx.objectStore("JATE");
-  const request = store.add({ name, home, cell, email });
+  const request = store.put({id:1, value:notes});
   const result = await request;
   console.log("🚀 - data saved to the database", result);
 };
@@ -27,21 +27,21 @@ export const getDb = async () => {
   const JATEDb = await openDB("JATE", 1);
   const tx = JATEDb.transaction("JATE", "readonly");
   const store = tx.objectStore("JATE");
-  const request = store.getAll();
+  const request = store.get(1);
   const result = await request;
   console.log("result.value", result);
-  return result;
+  return result?.value;
 };
 
-export const deleteDb = async (id) => {
-  console.log("DELETE from the database", id);
-  const JATEDb = await openDB("JATE", 1);
-  const tx = JATEDb.transaction("JATE", "readwrite");
-  const store = tx.objectStore("JATE");
-  const request = store.delete(id);
-  const result = await request;
-  console.log("result.value", result);
-  return result;
-};
+// export const deleteDb = async (id) => {
+//   console.log("DELETE from the database", id);
+//   const JATEDb = await openDB("JATE", 1);
+//   const tx = JATEDb.transaction("JATE", "readwrite");
+//   const store = tx.objectStore("JATE");
+//   const request = store.delete(id);
+//   const result = await request;
+//   console.log("result.value", result);
+//   return result;
+// };
 
 initdb();
